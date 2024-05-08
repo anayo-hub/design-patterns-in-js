@@ -6,6 +6,12 @@ const eventEmitterMixin = (Superclass) =>
     }
 
     on(eventName, listener, maybe = false) {
+      if (typeof eventName !== "string") {
+        throw new Error("eventName must be a string");
+      }
+      if (typeof listener !== "function") {
+        throw new Error("listener must be a function");
+      }
       // Added 'maybe' option
       this._events[eventName] = this._events[eventName] || [];
 
